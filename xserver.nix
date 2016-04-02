@@ -24,7 +24,7 @@
     pcmanfm
     gvfs
     dmenu
-    # vanilla-dmz
+    vanilla-dmz
   ];
 
   environment.pathsToLink = [
@@ -62,13 +62,10 @@
     windowManager.default = "xmonad";
 
     # Touchpad configuration
-    synaptics = {
+    libinput = {
       enable = true;
-      dev = "/dev/input/event*";
-      twoFingerScroll = true;
-      accelFactor = "0.001";
-      buttonsMap = [ 1 3 2 ];
-      tapButtons = false;
+      dev = "/dev/input/event0";
+      tapping = false;
     };
 
     videoDrivers = [ "ati" "intel" "modesetting" ];
