@@ -12,15 +12,10 @@
     shared_mime_info
     gtk
     xfce.gtk_xfce_engine
-    xfce.xfconf
-    xfce.xfce4panel
-    xfce.xfce4mixer
     xfce.xfce4volumed
     xfce.xfce4notifyd
-    xfce.xfce4screenshooter
     xfce.xfce4_power_manager
-    xfce.exo
-    xfce.garcon
+    acpid
     pcmanfm
     gvfs
     dmenu
