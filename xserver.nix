@@ -59,7 +59,7 @@
     # Touchpad configuration
     libinput = {
       enable = true;
-      dev = "/dev/input/event0";
+      dev = "/dev/input/event*";
       tapping = false;
     };
 
