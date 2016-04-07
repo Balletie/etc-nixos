@@ -51,9 +51,9 @@
   fonts = {
     fonts = with pkgs; [
       dina-font
-      # dina-font-pcf
+      dina-font-pcf
       gohufont
-      # iosevka
+      iosevka
       unifont
     ];
   };
