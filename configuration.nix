@@ -16,6 +16,7 @@
   boot.loader.gummiboot.enable = true;
   boot.loader.gummiboot.timeout = null;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_3_18;
 
   networking.hostName = "samsara"; # Define your hostname.
   networking.networkmanager.enable = true;
