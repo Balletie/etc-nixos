@@ -69,6 +69,13 @@
 
   # Configure ZSH
   programs.zsh.enable = true;
+  # Enable GRML zsh config
+  environment.etc."zshrc" = {
+    source = "${pkgs.grml-zsh-config}/etc/zsh/zshrc";
+  };
+  environment.etc."zsh/keephack" = {
+    source = "${pkgs.grml-zsh-config}/etc/zsh/keephack";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.skip = {
