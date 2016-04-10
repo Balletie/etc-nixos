@@ -15,7 +15,6 @@
     xfce.xfce4volumed
     xfce.xfce4notifyd
     xfce.xfce4_power_manager
-    acpid
     pcmanfm
     gvfs
     dmenu

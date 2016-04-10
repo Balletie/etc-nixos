@@ -59,6 +59,28 @@
     ];
   };
 
+  # Enable ACPI daemon.
+  services.acpid = {
+    enable = true;
+    lidEventCommands = ''
+      case "$3" in
+          close)
+              logger 'Lid closed, going to sleep'
+              systemctl suspend
+              ;;
+          open)
+              logger 'Lid opened'
+              ;;
+          *)
+              logger 'Unhandled lid event action: $3'
+              ;;
+      esac
+    '';
+  };
+
+  # Enable udisks2
+  services.udisks2.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
