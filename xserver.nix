@@ -19,6 +19,7 @@
     gvfs
     dmenu
     vanilla-dmz
+    lightlocker
   ];
 
   environment.pathsToLink = [
