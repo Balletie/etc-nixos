@@ -66,6 +66,6 @@
 
     videoDrivers = [ "ati" "intel" "modesetting" ];
     # Set compose key to right alt, disable caps lock to be a control key.
-    xkbOptions = "terminate:ctrl_alt_bksp, compose:ralt, control:nocaps";
+    xkbOptions = "terminate:ctrl_alt_bksp, compose:ralt, ctrl:nocaps";
   };
 }
