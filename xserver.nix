@@ -12,6 +12,7 @@
     shared_mime_info
     gtk
     xfce.gtk_xfce_engine
+    xfce.xfconf
     xfce.xfce4volumed
     xfce.xfce4notifyd
     xfce.xfce4_power_manager
