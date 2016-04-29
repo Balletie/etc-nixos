@@ -50,12 +50,18 @@
 
   # Fonts
   fonts = {
+    fontconfig.defaultFonts = {
+      sansSerif = [ "DejaVu Sans"      "Noto Emoji" ];
+      serif     = [ "DejaVu Serif"     "Noto Emoji" ];
+      monospace = [ "DejaVu Sans Mono" "Noto Emoji" ];
+    };
     fonts = with pkgs; [
       dina-font
       dina-font-pcf
       gohufont
       iosevka
       unifont
+      noto-fonts-emoji
     ];
   };
 
