@@ -22,6 +22,7 @@
     dmenu
     vanilla-dmz
     lightlocker
+    elementary-icon-theme
   ];
 
   environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.xfce.gvfs}/lib/gio/modules" ];
@@ -49,6 +50,8 @@
         export GTK_PATH="${config.system.path}/lib/gtk-2.0:${config.system.path}/lib/gtk-3.0"
         # Set GTK_DATA_PREFIX so that GTK+ can find the Xfce themes.
         export GTK_DATA_PREFIX=${config.system.path}
+        # SVG loader for pixbuf
+        export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg}/lib/gdk-pixbuf-2.0/*/loaders.cache)
       '';
     };
 
