@@ -19,10 +19,13 @@
     # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
     xfce.gvfs
     pcmanfm
+    redshift
     dmenu
     vanilla-dmz
     lightlocker
     elementary-icon-theme
+    tint2
+    rxvt_unicode-with-plugins
   ];
 
   environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.xfce.gvfs}/lib/gio/modules" ];
@@ -55,6 +58,42 @@
       '';
     };
 
+    desktopManager.session = [ {
+      name = "custom";
+      start = ''
+        ## My own "desktop environment"
+
+        # Start caching dmenu_run entries in advance
+        ${pkgs.dmenu}/bin/dmenu_path &
+
+        # Desktop background and desktop files
+        ${pkgs.pcmanfm}/bin/pcmanfm --desktop &
+
+        # Panel
+        ${pkgs.tint2}/bin/tint2 &
+
+        # Lockscreen, e.g. when I suspend.
+        ${pkgs.lightlocker}/bin/light-locker &
+
+        # Brightness keys, automatically starts xfce4-notifyd if no notification daemon is running.
+        ${pkgs.xfce.xfce4_power_manager}/bin/xfce4-power-manager &
+
+        # Volume keys, automatically starts xfce4-notifyd if no notification daemon is running.
+        ${pkgs.xfce.xfce4volumed}/bin/xfce4-volumed &
+
+        # NetworkManager applet
+        ${pkgs.networkmanagerapplet}/bin/nm-applet &
+
+        # Set left pointer of root screen
+        ${pkgs.xorg.xsetroot}/bin/xsetroot -cursor_name left_ptr &
+
+        # rxvt-unicode in daemon mode. Faster startup for terminals.
+        ${pkgs.rxvt_unicode-with-plugins}/bin/urxvtd -q -f -o &
+
+        # Redshift, duh.
+        ${pkgs.redshift}/bin/redshift-gtk -l 51.913799:4.468502 -t 6500:2500 &
+      '';
+    } ];
     desktopManager.xterm.enable = false;
     # desktopManager.xfce.enable = true;
     # desktopManager.default = "xfce";
