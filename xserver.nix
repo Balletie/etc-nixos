@@ -15,6 +15,7 @@
     xfce.xfconf
     xfce.xfce4volumed
     xfce.xfce4_power_manager
+
     # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
     xfce.gvfs
     pcmanfm
@@ -23,8 +24,14 @@
     vanilla-dmz
     lightlocker
     elementary-icon-theme
+
     # Icons from haiku OS, defined in ./nixpkgs/config.nix
     haiku-icon-theme
+
+    # Haiku-ish GTK theme, needs murrine engine
+    murrina-haikuish
+    gtk-engine-murrine
+
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn
     tint2
