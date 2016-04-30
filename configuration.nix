@@ -33,8 +33,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  # For the broadcom driver :(
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = import ./nixpkgs/config.nix;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget

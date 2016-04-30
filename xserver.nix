@@ -14,7 +14,6 @@
     xfce.gtk_xfce_engine
     xfce.xfconf
     xfce.xfce4volumed
-    xfce.xfce4notifyd
     xfce.xfce4_power_manager
     # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
     xfce.gvfs
@@ -24,6 +23,10 @@
     vanilla-dmz
     lightlocker
     elementary-icon-theme
+    # Icons from haiku OS, defined in ./nixpkgs/config.nix
+    haiku-icon-theme
+    # Patched TWMN defined in ./nixpkgs/config.nix
+    twmn
     tint2
     rxvt_unicode-with-plugins
   ];
@@ -71,6 +74,9 @@
 
         # Panel
         ${pkgs.tint2}/bin/tint2 &
+
+        # TWMN for notifications
+        ${pkgs.twmn}/bin/twmnd &
 
         # Lockscreen, e.g. when I suspend.
         ${pkgs.lightlocker}/bin/light-locker &

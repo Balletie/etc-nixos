@@ -1,0 +1,11 @@
+--- a/twmnd/widget.cpp
++++ b/twmnd/widget.cpp
+@@ -691,6 +691,8 @@ void Widget::loadDefaults()
+         m.data["size"] = boost::optional<QVariant>(s->get("gui/height"));
+     if (!m.data["icon"])
+         m.data["icon"] = loadPixmap(s->has("gui/icon") ? s->get("gui/icon").toString() : "");
++    if (!m.data["title"])
++        m.data["title"] = boost::optional<QVariant>(s->get("gui/title"));
+     if (!m.data["aot"])
+         m.data["aot"] = boost::optional<QVariant>(s->get("gui/always_on_top"));
+     if (!m.data["ac"])
