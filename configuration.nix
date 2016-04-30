@@ -105,6 +105,9 @@
     source = "${pkgs.grml-zsh-config}/etc/zsh/keephack";
   };
 
+  # Set vim as editor.
+  environment.variables.EDITOR = "vim";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.skip = {
     description = "Skip Lentz";
