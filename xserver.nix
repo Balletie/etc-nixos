@@ -97,9 +97,6 @@
         # NetworkManager applet
         ${pkgs.networkmanagerapplet}/bin/nm-applet &
 
-        # Set left pointer of root screen
-        ${pkgs.xorg.xsetroot}/bin/xsetroot -cursor_name left_ptr &
-
         # rxvt-unicode in daemon mode. Faster startup for terminals.
         ${pkgs.rxvt_unicode-with-plugins}/bin/urxvtd -q -f -o &
 
