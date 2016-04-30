@@ -16,12 +16,15 @@
     xfce.xfce4volumed
     xfce.xfce4notifyd
     xfce.xfce4_power_manager
+    # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
+    xfce.gvfs
     pcmanfm
-    gvfs
     dmenu
     vanilla-dmz
     lightlocker
   ];
+
+  environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.xfce.gvfs}/lib/gio/modules" ];
 
   environment.pathsToLink = [
     "/share/xfce4"
