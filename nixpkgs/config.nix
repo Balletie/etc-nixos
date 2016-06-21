@@ -1,6 +1,7 @@
 {
   # For the broadcom driver :(
   allowUnfree = true;
+  allowBroken = true;
   packageOverrides = pkgs: rec {
     twmn = pkgs.stdenv.lib.overrideDerivation pkgs.twmn (oldAttrs: {
       patches = [

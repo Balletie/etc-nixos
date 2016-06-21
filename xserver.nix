@@ -64,7 +64,7 @@
         # Set GTK_DATA_PREFIX so that GTK+ can find the Xfce themes.
         export GTK_DATA_PREFIX=${config.system.path}
         # SVG loader for pixbuf
-        export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg}/lib/gdk-pixbuf-2.0/*/loaders.cache)
+        export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)
       '';
     };
 
@@ -74,34 +74,34 @@
         ## My own "desktop environment"
 
         # Start caching dmenu_run entries in advance
-        ${pkgs.dmenu}/bin/dmenu_path &
+        ${pkgs.dmenu.out}/bin/dmenu_path &
 
         # Desktop background and desktop files
-        ${pkgs.pcmanfm}/bin/pcmanfm --desktop &
+        ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
 
         # Panel
-        ${pkgs.tint2}/bin/tint2 &
+        ${pkgs.tint2.out}/bin/tint2 &
 
         # TWMN for notifications
-        ${pkgs.twmn}/bin/twmnd &
+        ${pkgs.twmn.out}/bin/twmnd &
 
         # Lockscreen, e.g. when I suspend.
-        ${pkgs.lightlocker}/bin/light-locker &
+        ${pkgs.lightlocker.out}/bin/light-locker &
 
         # Brightness keys, automatically starts xfce4-notifyd if no notification daemon is running.
-        ${pkgs.xfce.xfce4_power_manager}/bin/xfce4-power-manager &
+        ${pkgs.xfce.xfce4_power_manager.out}/bin/xfce4-power-manager &
 
         # Volume keys, automatically starts xfce4-notifyd if no notification daemon is running.
-        ${pkgs.xfce.xfce4volumed}/bin/xfce4-volumed &
+        ${pkgs.xfce.xfce4volumed.out}/bin/xfce4-volumed &
 
         # NetworkManager applet
-        ${pkgs.networkmanagerapplet}/bin/nm-applet &
+        ${pkgs.networkmanagerapplet.out}/bin/nm-applet &
 
         # rxvt-unicode in daemon mode. Faster startup for terminals.
-        ${pkgs.rxvt_unicode-with-plugins}/bin/urxvtd -q -f -o &
+        ${pkgs.rxvt_unicode-with-plugins.out}/bin/urxvtd -q -f -o &
 
         # Redshift, duh.
-        ${pkgs.redshift}/bin/redshift-gtk -l 51.913799:4.468502 -t 6500:2500 &
+        ${pkgs.redshift.out}/bin/redshift-gtk -l 51.913799:4.468502 -t 6500:2500 &
       '';
     } ];
     desktopManager.xterm.enable = false;

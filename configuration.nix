@@ -12,9 +12,10 @@
       ./xserver.nix
     ];
 
-  # Use the gummiboot efi boot loader. Disable timeout, press space to show menu.
-  boot.loader.gummiboot.enable = true;
-  boot.loader.gummiboot.timeout = null;
+  # Use the systemd-boot efi boot loader.
+  # Disable timeout, press space to show menu.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = null;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_3_18;
 
@@ -40,7 +41,7 @@
   environment.systemPackages = with pkgs; [
     git
     grml-zsh-config
-    texLiveFull
+    texlive.combined.scheme-full
     vim
     wget
     ## For correct mime-types. See https://github.com/NixOS/nixpkgs/issues/13134
@@ -55,6 +56,10 @@
       monospace = [ "DejaVu Sans Mono" "Noto Emoji" ];
     };
     fonts = with pkgs; [
+      gentium
+      gentium-book-basic
+      fira-mono
+      opensans-ttf
       dina-font
       dina-font-pcf
       gohufont
