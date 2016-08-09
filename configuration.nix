@@ -59,6 +59,7 @@
       gentium
       gentium-book-basic
       fira-mono
+      font-awesome-ttf
       opensans-ttf
       dina-font
       dina-font-pcf
@@ -66,6 +67,8 @@
       iosevka
       unifont
       noto-fonts-emoji
+      google-fonts
+      ttf_bitstream_vera
     ];
   };
 
