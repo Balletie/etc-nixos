@@ -34,7 +34,7 @@
 
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn
-    tint2
+    haskellPackages.xmobar
     rxvt_unicode-with-plugins
   ];
 
@@ -72,15 +72,11 @@
       name = "custom";
       start = ''
         ## My own "desktop environment"
-
-        # Start caching dmenu_run entries in advance
-        ${pkgs.dmenu.out}/bin/dmenu_path &
-
         # Desktop background and desktop files
         ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
 
-        # Panel
-        ${pkgs.tint2.out}/bin/tint2 &
+        # Tray
+        ${pkgs.stalonetray.out}/bin/stalonetray &
 
         # TWMN for notifications
         ${pkgs.twmn.out}/bin/twmnd &
