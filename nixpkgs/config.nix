@@ -15,7 +15,7 @@
       name = "${package-name}-${version}";
       src = pkgs.fetchurl {
         name = "${name}.tar.gz";
-        url = "http://gnome-look.org/CONTENT/content-files/127322-Murrina%20Haikuish.tar.gz";
+        url = "https://dl.opendesktop.org/api/files/download/id/1460969042/127322-Murrina%20Haikuish.tar.gz";
         sha256 = "11mbffnxy7vyd03mmnvcy27lmmsa4sgir372pxym4fz8nsfnja4s";
       };
 
@@ -36,7 +36,7 @@
 
       src = pkgs.fetchurl {
         name = "${name}.tar.bz2";
-        url = "http://gnome-look.org/CONTENT/content-files/114723-Haiku-${version}.tar.bz2";
+        url = "https://dl.opendesktop.org/api/files/download/id/1460759082/114723-Haiku-${version}.tar.bz2";
         sha256 = "08nq21qmrjqz09k1wzf5vkvi6gzb22ry8ri58q65bqwal0r8cq95";
       };
 
