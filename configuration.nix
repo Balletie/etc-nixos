@@ -50,25 +50,30 @@
 
   # Fonts
   fonts = {
+    fontconfig.ultimate.enable = false;
     fontconfig.defaultFonts = {
-      sansSerif = [ "DejaVu Sans"      "Noto Emoji" ];
-      serif     = [ "DejaVu Serif"     "Noto Emoji" ];
-      monospace = [ "DejaVu Sans Mono" "Noto Emoji" ];
+      sansSerif = [ "Bitstream Vera Sans"      "EmojiOne Color" ];
+      serif     = [ "Bitstream Vera Serif"     "EmojiOne Color" ];
+      monospace = [ "Bitstream Vera Sans Mono" "EmojiOne Color" ];
     };
     fonts = with pkgs; [
-      gentium
-      gentium-book-basic
-      fira-mono
+      ttf_bitstream_vera
+      emojione
+      noto-fonts
+      noto-fonts-emoji
+      google-fonts
+
+      # Icon font
       font-awesome-ttf
+
+      # Mono-space fonts
+      fira-mono
       opensans-ttf
       dina-font
       dina-font-pcf
       gohufont
       iosevka
       unifont
-      noto-fonts-emoji
-      google-fonts
-      ttf_bitstream_vera
     ];
   };
 
