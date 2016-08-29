@@ -38,6 +38,7 @@
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn
     haskellPackages.xmobar
+    stalonetray
     rxvt_unicode-with-plugins
   ];
 
@@ -68,41 +69,42 @@
         export GTK_DATA_PREFIX=${config.system.path}
         # SVG loader for pixbuf
         export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)
+
+        # Set XDG menu prefix
+        export XDG_MENU_PREFIX="lxde-"
       '';
+      session = [ {
+        name = "custom";
+        manage = "desktop";
+        start = ''
+          ## My own "desktop environment"
+          # Desktop background and desktop files
+          ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
+
+          # TWMN for notifications
+          ${pkgs.twmn.out}/bin/twmnd &
+
+          # Lockscreen, e.g. when I suspend.
+          ${pkgs.lightlocker.out}/bin/light-locker &
+
+          # Brightness keys, automatically starts xfce4-notifyd if no notification daemon is running.
+          ${pkgs.xfce.xfce4_power_manager.out}/bin/xfce4-power-manager &
+
+          # Volume keys, automatically starts xfce4-notifyd if no notification daemon is running.
+          ${pkgs.xfce.xfce4volumed.out}/bin/xfce4-volumed &
+
+          # NetworkManager applet
+          ${pkgs.networkmanagerapplet.out}/bin/nm-applet &
+
+          # rxvt-unicode in daemon mode. Faster startup for terminals.
+          ${pkgs.rxvt_unicode-with-plugins.out}/bin/urxvtd -q -f -o &
+
+          # Redshift, duh.
+          ${pkgs.redshift.out}/bin/redshift-gtk -l 51.913799:4.468502 -t 6500:2500 &
+        '';
+      } ];
     };
 
-    desktopManager.session = [ {
-      name = "custom";
-      start = ''
-        ## My own "desktop environment"
-        # Desktop background and desktop files
-        ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
-
-        # Tray
-        ${pkgs.stalonetray.out}/bin/stalonetray &
-
-        # TWMN for notifications
-        ${pkgs.twmn.out}/bin/twmnd &
-
-        # Lockscreen, e.g. when I suspend.
-        ${pkgs.lightlocker.out}/bin/light-locker &
-
-        # Brightness keys, automatically starts xfce4-notifyd if no notification daemon is running.
-        ${pkgs.xfce.xfce4_power_manager.out}/bin/xfce4-power-manager &
-
-        # Volume keys, automatically starts xfce4-notifyd if no notification daemon is running.
-        ${pkgs.xfce.xfce4volumed.out}/bin/xfce4-volumed &
-
-        # NetworkManager applet
-        ${pkgs.networkmanagerapplet.out}/bin/nm-applet &
-
-        # rxvt-unicode in daemon mode. Faster startup for terminals.
-        ${pkgs.rxvt_unicode-with-plugins.out}/bin/urxvtd -q -f -o &
-
-        # Redshift, duh.
-        ${pkgs.redshift.out}/bin/redshift-gtk -l 51.913799:4.468502 -t 6500:2500 &
-      '';
-    } ];
     desktopManager.xterm.enable = false;
     # desktopManager.xfce.enable = true;
     # desktopManager.default = "xfce";
