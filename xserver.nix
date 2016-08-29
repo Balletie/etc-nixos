@@ -16,6 +16,9 @@
     xfce.xfce4volumed
     xfce.xfce4_power_manager
 
+    # Menu data
+    lxmenu-data
+
     # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
     xfce.gvfs
     pcmanfm
