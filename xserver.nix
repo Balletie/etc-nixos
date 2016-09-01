@@ -121,6 +121,7 @@
     };
 
     videoDrivers = [ "ati" "intel" "modesetting" ];
+    deviceSection = ''Option "TearFree" "on"'';
     # Set compose key to right alt, disable caps lock to be a control key.
     xkbOptions = "terminate:ctrl_alt_bksp, compose:ralt, ctrl:nocaps";
   };
