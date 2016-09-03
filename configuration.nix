@@ -36,6 +36,8 @@
 
   nixpkgs.config = import ./nixpkgs/config.nix;
 
+  nix.useSandbox = true;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
