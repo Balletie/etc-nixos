@@ -28,12 +28,10 @@
     lightlocker
     elementary-icon-theme
 
-    # Icons from haiku OS, defined in ./nixpkgs/config.nix
+    # Haiku GTK theme, icons and cursor, defined in ./nixpkgs/config.nix
     haiku-icon-theme
-
-    # Haiku-ish GTK theme, needs murrine engine
-    murrina-haikuish
-    gtk-engine-murrine
+    haiku-gtk
+    haiku-hand
 
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn

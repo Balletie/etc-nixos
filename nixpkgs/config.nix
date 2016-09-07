@@ -9,6 +9,42 @@
       ] ++ oldAttrs.patches or [];
     });
 
+    haiku-gtk = pkgs.stdenv.mkDerivation rec {
+      package-name = "haiku-gtk";
+      version = "5-1-11";
+      name = "${package-name}-${version}";
+      src = pkgs.fetchurl {
+        name = "${name}.tar.bz2";
+        url = "https://dl.opendesktop.org/api/files/download/id/1460967677/106952-Haiku-${version}.tar.bz2";
+        sha256 = "1lyvh3lvvbdh6352gkf5gzyjlmcpgr4c40rlk6c6jrjvhjcavy5c";
+      };
+
+      dontBuild = true;
+
+      installPhase = ''
+        install -dm 755 "$out/share/themes/Haiku/"
+        cp -r . "$out/share/themes/Haiku/"
+      '';
+    };
+
+    haiku-hand = pkgs.stdenv.mkDerivation rec {
+      package-name = "haiku-hand";
+      version = "0.5";
+      name = "${package-name}-${version}";
+      src = pkgs.fetchurl {
+        name = "${name}.tar.bz2";
+        url = "https://dl.opendesktop.org/api/files/download/id/1460735079/116169-HaikuHand-${version}.tar.bz2";
+        sha256 = "0jr0ybb2kczbfxpxqxgm7267xzqijabll4rrrjk933x0q9i80awi";
+      };
+
+      dontBuild = true;
+
+      installPhase = ''
+        install -dm 755 "$out/share/icons/HaikuHand/"
+        cp -r . "$out/share/icons/HaikuHand/"
+      '';
+    };
+
     murrina-haikuish = pkgs.stdenv.mkDerivation rec {
       package-name = "murrina-haikuish";
       version = "1.01";
