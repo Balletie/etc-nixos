@@ -50,6 +50,12 @@
     # shared_mime_info
   ];
 
+  services.emacs.enable = true;
+  # Following line enables daemon service.
+  services.emacs.install = true;
+  # skipsEmacs is defined in nixpkgs/config.nix.
+  services.emacs.package = pkgs.skipsEmacs;
+
   # Fonts
   fonts = {
     fontconfig.ultimate.enable = false;
@@ -63,7 +69,7 @@
       emojione
       noto-fonts
       noto-fonts-emoji
-      google-fonts
+      roboto
 
       # Icon font
       font-awesome-ttf

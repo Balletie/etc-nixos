@@ -9,6 +9,82 @@
       ] ++ oldAttrs.patches or [];
     });
 
+    skipsEmacs = with pkgs.emacs25PackagesNg;
+      pkgs.emacs25WithPackages ((with melpaPackages; [
+        auctex
+	# cmake-ide <-- uncomment after my changes have been merged.
+	# cmake-mode
+        color-theme-sanityinc-tomorrow
+	company
+        evil
+	flycheck
+	helm
+	helm-nixos-options
+        hlinum
+        htmlize
+        linum-off
+        magit
+        markdown-mode
+        markdown-preview-mode
+	nix-mode
+	nix-sandbox
+	nixos-options
+	pretty-sha-path # This prettifies nix-store paths.
+        use-package
+      ]) ++ (with elpaPackages; [
+        exwm
+      ])++ (with orgPackages; [
+        org-plus-contrib
+      ]) ++ [ cmake-ide rtags ]);
+
+    monoisome-ttf = pkgs.stdenv.mkDerivation rec {
+      name = "monoisome-${version}";
+      version = "0.61";
+
+      src = pkgs.fetchurl {
+        name = "Monoisome-Regular.ttf";
+        url = "https://github.com/larsenwork/monoid/blob/0.61/Monoisome/Monoisome-Regular.ttf?raw=true";
+        sha256 = "0c090i0bmlnch1cy1yc0nricy5pfy27l00n8snkzaczacdbarv8a";
+      };
+
+      phases = [ "installPhase" ];
+
+      installPhase = ''
+        mkdir -p $out/share/fonts/truetype
+        cp -v $src $out/share/fonts/truetype
+      '';
+
+      meta = with pkgs.stdenv.lib; {
+        homepage = http://larsenwork.com/monoid/;
+        description = "Coding font with programming ligatures";
+        longDescription = ''
+          Customisable coding font with alternates, ligatures and contextual positioning.
+        '';
+        license = licenses.ofl;
+        maintainers = [];
+        platforms = platforms.all;
+      };
+    };
+
+    comix = pkgs.stdenv.mkDerivation rec {
+      package-name = "comix";
+      version = "0.9.0";
+      name = "${package-name}-${version}";
+      src = pkgs.fetchurl {
+        url = "http://www.limitland.de/downloads/comixcursors/ComixCursors-${version}.tar.bz2";
+        sha256 = "0j16pihx39kqzw4zyzdlc6qhd1sb8q0kpprz2zz0wia36wvdgsci";
+      };
+
+      dontBuild = true;
+
+      sourceRoot = "./";
+
+      installPhase = ''
+        mkdir -p "$out/share/icons"
+        cp -R ComixCursors-[A-Z]* "$out/share/icons/"
+      '';
+    };
+
     haiku-gtk = pkgs.stdenv.mkDerivation rec {
       package-name = "haiku-gtk";
       version = "5-1-11";
