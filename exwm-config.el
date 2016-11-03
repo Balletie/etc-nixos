@@ -8,9 +8,11 @@
 (setq exwm-layout-show-all-buffers t)
 
 ;; Make class name the buffer name
-(add-hook 'exwm-update-class-hook
-          (lambda ()
-            (exwm-workspace-rename-buffer exwm-class-name)))
+(add-hook 'exwm-update-title-hook
+	  (lambda ()
+	    (exwm-workspace-rename-buffer
+	     (truncate-string-to-width (format "%s : %s" exwm-class-name exwm-title)
+				       43 0 nil "..."))))
 ;; 's-r': Reset
 (exwm-input-set-key (kbd "s-r") #'exwm-reset)
 ;; 's-w': Switch workspace
@@ -26,22 +28,16 @@
                     (lambda (command)
                       (interactive (list (read-shell-command "$ ")))
 		      (start-process-shell-command command nil command)))
+;; 's-RET': Launch terminal
+(exwm-input-set-key (kbd "<s-return>")
+                    (lambda ()
+		      (interactive)
+		      (start-process-shell-command "urxvtc" nil "urxvtc")))
 
-;; Line-editing shortcuts
-(exwm-input-set-simulation-keys
- '(([?\C-b] . left)
-   ([?\C-f] . right)
-   ([?\C-p] . up)
-   ([?\C-n] . down)
-   ([?\C-a] . home)
-   ([?\C-e] . end)
-   ([?\M-v] . prior)
-   ([?\C-v] . next)
-   ([?\C-d] . delete)
-   ([?\C-k] . (S-end delete))))
 (exwm-config-misc)
 
 (require 'exwm-systemtray)
+(setq exwm-systemtray-height 15)
 (exwm-systemtray-enable)
 
 (exwm-enable)

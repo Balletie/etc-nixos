@@ -11,9 +11,9 @@
 
     skipsEmacs = with pkgs.emacs25PackagesNg;
       pkgs.emacs25WithPackages ((with melpaPackages; [
+        aggressive-indent
         auctex
 	# cmake-ide <-- uncomment after my changes have been merged.
-	# cmake-mode
         color-theme-sanityinc-tomorrow
 	company
         evil
@@ -30,6 +30,7 @@
 	nix-sandbox
 	nixos-options
 	pretty-sha-path # This prettifies nix-store paths.
+	smart-mode-line
         use-package
       ]) ++ (with elpaPackages; [
         exwm
