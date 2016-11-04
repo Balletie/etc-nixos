@@ -68,7 +68,7 @@
 
     displayManager = {
       lightdm.enable = true;
-      lightdm.background = "#FCAF3E";
+      lightdm.background = "#1d1f21";
       sessionCommands = ''
         # Set GTK_PATH so that GTK+ can find the theme engines.
         export GTK_PATH="${config.system.path}/lib/gtk-2.0:${config.system.path}/lib/gtk-3.0"
@@ -86,7 +86,7 @@
         start = ''
           ## My own "desktop environment"
           # Desktop background and desktop files
-          ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
+          # ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
 
           # TWMN for notifications
           ${pkgs.twmn.out}/bin/twmnd &
