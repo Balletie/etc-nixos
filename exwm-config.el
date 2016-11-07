@@ -35,9 +35,9 @@
 		      (start-process-shell-command "urxvtc" nil "urxvtc")))
 
 ;; From exwm-config-misc, but does not disable fringes.
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;(menu-bar-mode -1)
+;(tool-bar-mode -1)
+;(scroll-bar-mode -1)
 
 (require 'exwm-systemtray)
 (setq exwm-systemtray-height 15)

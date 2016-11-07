@@ -18,7 +18,9 @@
 	company
         evil
 	flycheck
+	git-gutter-fringe
 	helm
+	helm-ag
 	helm-nixos-options
         hlinum
         htmlize
