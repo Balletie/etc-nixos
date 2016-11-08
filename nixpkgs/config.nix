@@ -13,6 +13,7 @@
       pkgs.emacs25WithPackages ((with melpaPackages; [
         aggressive-indent
         auctex
+        avy
         benchmark-init
         # cmake-ide <-- uncomment after my changes have been merged.
         color-theme-sanityinc-tomorrow
@@ -32,6 +33,7 @@
         nix-mode
         nix-sandbox
         nixos-options
+        popwin
         pretty-sha-path # This prettifies nix-store paths.
         smart-mode-line
         use-package
