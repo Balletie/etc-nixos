@@ -13,26 +13,27 @@
       pkgs.emacs25WithPackages ((with melpaPackages; [
         aggressive-indent
         auctex
-	# cmake-ide <-- uncomment after my changes have been merged.
+        benchmark-init
+        # cmake-ide <-- uncomment after my changes have been merged.
         color-theme-sanityinc-tomorrow
-	company
+        company
         evil
-	flycheck
-	git-gutter-fringe
-	helm
-	helm-ag
-	helm-nixos-options
+        flycheck
+        git-gutter-fringe
+        helm
+        helm-ag
+        helm-nixos-options
         hlinum
         htmlize
         linum-off
         magit
         markdown-mode
         markdown-preview-mode
-	nix-mode
-	nix-sandbox
-	nixos-options
-	pretty-sha-path # This prettifies nix-store paths.
-	smart-mode-line
+        nix-mode
+        nix-sandbox
+        nixos-options
+        pretty-sha-path # This prettifies nix-store paths.
+        smart-mode-line
         use-package
       ]) ++ (with elpaPackages; [
         exwm

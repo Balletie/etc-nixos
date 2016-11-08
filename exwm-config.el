@@ -1,5 +1,4 @@
 (require 'exwm)
-(require 'exwm-config)
 
 ;; Following is taken from (exwm-config-default), with some changes.
 ;; Set the initial workspace number.
@@ -33,11 +32,6 @@
                     (lambda ()
 		      (interactive)
 		      (start-process-shell-command "urxvtc" nil "urxvtc")))
-
-;; From exwm-config-misc, but does not disable fringes.
-;(menu-bar-mode -1)
-;(tool-bar-mode -1)
-;(scroll-bar-mode -1)
 
 (require 'exwm-systemtray)
 (setq exwm-systemtray-height 15)
