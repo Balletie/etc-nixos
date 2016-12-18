@@ -15,6 +15,7 @@
     gtk2
     gtk_engines
     gtk-engine-murrine
+    zuki-themes
     vanilla-dmz
     gnome3.adwaita-icon-theme
     elementary-icon-theme
@@ -47,10 +48,15 @@
     enable = true;
     exportConfiguration = true;
     layout = "us";
+    updateDbusEnvironment = true;
 
     displayManager = {
       lightdm.enable = true;
       lightdm.background = "#1d1f21";
+      lightdm.greeters.gtk = {
+        theme.package = pkgs.zuki-themes;
+        theme.name = "Zukitre";
+      };
       sessionCommands = ''
         # Set GTK_PATH so that GTK+ can find the theme engines.
         export GTK_PATH="${config.system.path}/lib/gtk-2.0:${config.system.path}/lib/gtk-3.0"
