@@ -42,6 +42,9 @@
     "/share/gtksourceview-2.0"
   ];
 
+  # See https://github.com/NixOS/nixpkgs/issues/16327.
+  services.gnome3.at-spi2-core.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     autorun = true;
@@ -76,7 +79,7 @@
           ${pkgs.twmn.out}/bin/twmnd &
 
           # Lockscreen, e.g. when I suspend.
-          ${pkgs.lightlocker.out}/bin/light-locker --lock-on-lid &
+          ${pkgs.lightlocker.out}/bin/light-locker --lock-on-suspend &
 
           # NetworkManager applet
           ${pkgs.networkmanagerapplet.out}/bin/nm-applet &
