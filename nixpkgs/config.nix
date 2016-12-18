@@ -19,6 +19,7 @@
         color-theme-sanityinc-tomorrow
         company
         evil
+        evil-magit
         flycheck
         git-gutter-fringe
         helm
