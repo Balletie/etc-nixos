@@ -88,7 +88,45 @@
   services.hardware.pommed.enable = true;
   services.hardware.pommed.configFile = ./pommed.conf;
 
+  # Fix suspend / resume while lid stays open.
+  systemd.services.root_suspend = {
+    description = "Disable Resume While Lid Open";
+    before = [ "sleep.target" ];
+    wantedBy = [ "sleep.target" ];
+    script = ''
+      # If lid is open and we're going to suspend, disable resume on
+      # lid open.
+      if grep -qE "^state: *open$" /proc/acpi/button/lid/LID0/state
+      then
+        # Disable resuming when lid is open.
+        if grep -qE '^LID0.*enabled' /proc/acpi/wakeup
+        then
+          echo "Lid is open when going to sleep: disable resume on lid open."
+          echo LID0 > /proc/acpi/wakeup
+        fi
+      else
+        echo "Lid is closed, do nothing."
+      fi
 
+      exit 0
+    '';
+  };
+
+  systemd.services.root_resume = {
+    description = "Restore Resume On Lid Open";
+    after = [ "suspend.target" ];
+    wantedBy = [ "suspend.target" ];
+    script = ''
+      # Enable resuming on lid open again.
+      if grep -qE '^LID0.*disabled' /proc/acpi/wakeup
+      then
+        echo "Lid open wakeup is disabled: enable again."
+        echo LID0 > /proc/acpi/wakeup
+      fi
+
+      exit 0
+    '';
+  };
 
   # Configure ZSH
   programs.zsh.enable = true;
