@@ -84,6 +84,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enable Keyboard / LCD backlight keys, media keys, volume keys with beep, eject key.
+  services.hardware.pommed.enable = true;
+  services.hardware.pommed.configFile = ./pommed.conf;
+
 
 
   # Configure ZSH
