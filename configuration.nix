@@ -140,10 +140,13 @@
 
   # Set vim as editor.
   environment.variables.EDITOR = "vim";
+  # Set texmf home.
+  environment.variables.TEXMFHOME = "$HOME/.local/share/texmf";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.skip = {
     description = "Skip Lentz";
+    initialPassword = "foobar";
     home = "/home/skip";
     createHome = true;
     extraGroups = [ "wheel" "networkmanager" ];
