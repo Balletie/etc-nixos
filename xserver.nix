@@ -2,24 +2,29 @@
 
 {
   environment.systemPackages = with pkgs; [
+    # PCManFM and related (gvfs for mounting, mime-types and application menu)
+    # I use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency.
+    pcmanfm
+    xfce.gvfs
     shared_mime_info
-    gtk2
-    gtk_engines
-
-    imagemagick
-
-    # Menu data
     lxmenu-data
 
-    # Use pkgs.xfce.gvfs, because pkgs.gvfs has samba as dependency
-    xfce.gvfs
-    pcmanfm
     redshift
-    vanilla-dmz
-    lightlocker
-    lightdm
-    elementary-icon-theme
 
+    # GTK themes, icon themes and cursors.
+    gtk2
+    gtk_engines
+    gtk-engine-murrine
+    vanilla-dmz
+    gnome3.adwaita-icon-theme
+    elementary-icon-theme
+    moka-icon-theme
+    faba-icon-theme
+    faba-mono-icons
+
+    # LightDM and light-locker for login screen and locking on suspend.
+    lightdm
+    lightlocker
 
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn

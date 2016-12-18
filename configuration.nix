@@ -35,6 +35,7 @@
   environment.systemPackages = with pkgs; [
     git
     grml-zsh-config
+    imagemagick
     texlive.combined.scheme-full
     vim
     wget
