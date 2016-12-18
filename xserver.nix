@@ -94,7 +94,7 @@
         name = "exwm";
         manage = "window";
         start = let exwm_load = ./exwm-config.el; in ''
-          ${pkgs.skipsEmacs}/bin/emacs -l ${exwm_load} &
+          ${pkgs.skipsEmacs}/bin/emacs -fs -l ${exwm_load} &
           waitPID=$!
         '';
       } ];
