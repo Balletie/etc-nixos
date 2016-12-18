@@ -1,21 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  # I need this, for my eyes.
-  # services.redshift = {
-  #   enable = true;
-  #   latitude = "52.37";
-  #   longitude = "4.9" ;
-  # };
-
   environment.systemPackages = with pkgs; [
     shared_mime_info
     gtk2
     gtk_engines
-    xfce.gtk_xfce_engine
-    xfce.xfconf
-    xfce.xfce4volumed
-    xfce.xfce4_power_manager
 
     imagemagick
 
@@ -26,28 +15,16 @@
     xfce.gvfs
     pcmanfm
     redshift
-    dmenu
     vanilla-dmz
     lightlocker
-    slock
     lightdm
     elementary-icon-theme
 
-    # Haiku GTK theme, icons and cursor, defined in ./nixpkgs/config.nix
-    haiku-icon-theme
-    haiku-gtk
-    haiku-hand
-    comix # Alternative cursors
 
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn
-    haskellPackages.xmobar
-    stalonetray
     rxvt_unicode-with-plugins
   ];
-
-  # From https://github.com/NixOS/nixpkgs/issues/9656.
-  security.setuidPrograms = [ "slock" ];
 
   environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.xfce.gvfs}/lib/gio/modules" ];
 
@@ -84,21 +61,11 @@
         name = "custom";
         manage = "desktop";
         start = ''
-          ## My own "desktop environment"
-          # Desktop background and desktop files
-          # ${pkgs.pcmanfm.out}/bin/pcmanfm --desktop &
-
           # TWMN for notifications
           ${pkgs.twmn.out}/bin/twmnd &
 
           # Lockscreen, e.g. when I suspend.
           ${pkgs.lightlocker.out}/bin/light-locker --lock-on-lid &
-
-          # Brightness keys, automatically starts xfce4-notifyd if no notification daemon is running.
-          ${pkgs.xfce.xfce4_power_manager.out}/bin/xfce4-power-manager &
-
-          # Volume keys, automatically starts xfce4-notifyd if no notification daemon is running.
-          ${pkgs.xfce.xfce4volumed.out}/bin/xfce4-volumed &
 
           # NetworkManager applet
           ${pkgs.networkmanagerapplet.out}/bin/nm-applet &
@@ -120,16 +87,9 @@
     };
 
     desktopManager.xterm.enable = false;
-    # desktopManager.xfce.enable = true;
-    # desktopManager.default = "xfce";
-
-    # windowManager.xmonad.enable = true;
-    # windowManager.xmonad.enableContribAndExtras = true;
-
+    # I do this by hand above.
     # windowManager.exwm.enable = true;
     # windowManager.exwm.enableDefaultConfig = true;
-
-    # windowManager.default = "xmonad";
 
     # Touchpad configuration
     libinput = {

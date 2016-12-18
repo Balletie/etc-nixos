@@ -22,14 +22,6 @@
   networking.hostName = "samsara"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.networkmanager.packages = [ pkgs.networkmanagerapplet ];
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -85,36 +77,13 @@
     ];
   };
 
-  # Enable ACPI daemon.
-  services.acpid = {
-    enable = true;
-    lidEventCommands = ''
-      case "$3" in
-          close)
-              logger 'Lid closed, going to sleep'
-              systemctl suspend
-              ;;
-          open)
-              logger 'Lid opened'
-              ;;
-          *)
-              logger 'Unhandled lid event action: $3'
-              ;;
-      esac
-    '';
-  };
-
   # Enable udisks2
   services.udisks2.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Enable AccountsService, for lightdm.
-  # services.accounts-daemon.enable = true;
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Configure ZSH
   programs.zsh.enable = true;
