@@ -17,7 +17,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = null;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_3_18;
+
+  # Fix hang in kernel space by disabling hybrid graphics.
+  hardware.amdHybridGraphics.disable = true;
 
   networking.hostName = "samsara"; # Define your hostname.
   networking.networkmanager.enable = true;
