@@ -30,6 +30,10 @@
     # Patched TWMN defined in ./nixpkgs/config.nix
     twmn
     rxvt_unicode-with-plugins
+
+    # volnoti fork defined in ./nixpkgs/config.nix
+    volnoti_fork
+    compton
   ];
 
   environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.xfce.gvfs}/lib/gio/modules" ];
@@ -47,19 +51,20 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    autorun = true;
     enable = true;
+    autorun = true;
     exportConfiguration = true;
     layout = "us";
     updateDbusEnvironment = true;
 
-    displayManager = {
+    displayManager = rec {
       lightdm.enable = true;
       lightdm.background = "#1d1f21";
       lightdm.greeters.gtk = {
         theme.package = pkgs.zuki-themes;
         theme.name = "Zukitre";
       };
+
       sessionCommands = ''
         # Set GTK_PATH so that GTK+ can find the theme engines.
         export GTK_PATH="${config.system.path}/lib/gtk-2.0:${config.system.path}/lib/gtk-3.0"
@@ -71,12 +76,34 @@
         # Set XDG menu prefix
         export XDG_MENU_PREFIX="lxde-"
       '';
-      session = [ {
+      session = [ rec {
         name = "custom";
         manage = "desktop";
-        start = ''
+        start =
+        let
+	  scaleSvg = img: pkgs.runCommand (baseNameOf (builtins.unsafeDiscardStringContext img)) { nativeBuildInputs = [ pkgs.librsvg ]; } "${pkgs.librsvg.out}/bin/rsvg-convert -a -w 200 -f svg ${img} > $out";
+          xbindkeysrc = pkgs.substituteAll {
+            src = ./xbindkeysrc;
+	    vol_low = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-low-symbolic.svg"}";
+	    vol_medium = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-medium-symbolic.svg"}";
+	    vol_high = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-high-symbolic.svg"}";
+	    vol_mute = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-muted-symbolic.svg"}";
+	    brightness = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/display-brightness-symbolic.svg"}";
+	    kbd_brightness = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/keyboard-brightness-symbolic.svg"}";
+          };
+        in
+        ''
+	  # Compton for showing transparent notifications.
+	  ${pkgs.compton.out}/bin/compton -b --config /dev/null --backend glx --vsync opengl
+
           # TWMN for notifications
           ${pkgs.twmn.out}/bin/twmnd &
+
+	  # Volnoti for showing notifications on volume/brightness change
+	  ${pkgs.volnoti_fork.out}/bin/volnoti -r 6 -a 0.5 &
+
+	  # XBindkeys for calling volnoti-show on keypresses.
+	  ${pkgs.xbindkeys.out}/bin/xbindkeys -f ${xbindkeysrc} &
 
           # Lockscreen, e.g. when I suspend.
           ${pkgs.lightlocker.out}/bin/light-locker --lock-on-suspend &

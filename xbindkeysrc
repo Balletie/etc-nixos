@@ -1,0 +1,27 @@
+#audio_up
+"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+    XF86AudioRaiseVolume 
+
+#audio_down
+"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+    XF86AudioLowerVolume 
+
+#audio_mute
+"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+    XF86AudioMute 
+
+#brightness_up
+"echo "10k `cat /sys/class/backlight/gmux_backlight/brightness` `cat /sys/class/backlight/gmux_backlight/max_brightness` / 100 * 0k1/ p" | dc | xargs volnoti-show -s @brightness@"
+    XF86MonBrightnessUp 
+
+#brightness_down
+"echo "10k `cat /sys/class/backlight/gmux_backlight/brightness` `cat /sys/class/backlight/gmux_backlight/max_brightness` / 100 * 0k1/ p" | dc | xargs volnoti-show -s @brightness@"
+    XF86MonBrightnessDown 
+
+#kbd_backlight_up
+"echo "10k `cat /sys/class/leds/smc::kbd_backlight/brightness` `cat /sys/class/leds/smc::kbd_backlight/max_brightness` / 100 * 0k1/ p" | dc | xargs volnoti-show -s @kbd_brightness@"
+    XF86KbdBrightnessUp 
+
+#kbd_backlight_down
+"echo "10k `cat /sys/class/leds/smc::kbd_backlight/brightness` `cat /sys/class/leds/smc::kbd_backlight/max_brightness` / 100 * 0k1/ p" | dc | xargs volnoti-show -s @kbd_brightness@"
+   XF86KbdBrightnessDown

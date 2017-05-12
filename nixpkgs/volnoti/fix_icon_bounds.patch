@@ -1,0 +1,19 @@
+diff --git a/src/daemon.c b/src/daemon.c
+index e2c8913..cd7debe 100644
+--- a/src/daemon.c
++++ b/src/daemon.c
+@@ -197,11 +197,11 @@ gboolean volume_object_notify(VolumeObject* obj,
+     // choose icon
+     if (obj->muted)
+         set_notification_icon(GTK_WINDOW(obj->notification), obj->icon_muted);
+-    else if (obj->volume >= 75)
++    else if (obj->volume > 66)
+         set_notification_icon(GTK_WINDOW(obj->notification), obj->icon_high);
+-    else if (obj->volume >= 50)
++    else if (obj->volume > 33)
+         set_notification_icon(GTK_WINDOW(obj->notification), obj->icon_medium);
+-    else if (obj->volume >= 25)
++    else if (obj->volume > 0)
+         set_notification_icon(GTK_WINDOW(obj->notification), obj->icon_low);
+     else
+         set_notification_icon(GTK_WINDOW(obj->notification), obj->icon_off);

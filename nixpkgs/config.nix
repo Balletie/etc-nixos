@@ -9,6 +9,20 @@
       ] ++ oldAttrs.patches or [];
     });
 
+    volnoti_fork = pkgs.stdenv.lib.overrideDerivation pkgs.volnoti (oldAttrs: rec {
+      name = "volnoti-fork-${version}";
+      version = "22-10-2015";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "hcchu";
+        repo = "volnoti";
+        rev = "c5a94af7338d86ba015f11a2d0ce288ba5f5cbb6";
+        sha256 = "14h8a2cdfhyjvz2p1s2n128nsqawhgnp32bbcfdxxis1wswqai2z";
+      };
+
+      patches = [ ./volnoti/fix_icon_bounds.patch ];
+    });
+
     skipsEmacs = with pkgs.emacs25PackagesNg;
       pkgs.emacs25WithPackages ((with melpaPackages; [
         aggressive-indent
