@@ -17,6 +17,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = null;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "vt.global_cursor_default=0" "vga=current" ];
+  boot.plymouth = {
+    enable = true;
+    logo = pkgs.fetchurl {
+      url = "https://nixos.org/logo/nix-wiki.png";
+      sha256 = "1hrz7wr7i0b2bips60ygacbkmdzv466lsbxi22hycg42kv4m0173";
+    };
+    theme = "script";
+  };
 
   # Fix hang in kernel space by disabling hybrid graphics.
   hardware.amdHybridGraphics.disable = true;
