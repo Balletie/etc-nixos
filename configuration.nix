@@ -89,6 +89,7 @@
     ];
   };
 
+  services.journald.extraConfig = "SystemMaxUse=50M";
   # Enable udisks2
   services.udisks2.enable = true;
 
