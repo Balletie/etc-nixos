@@ -27,7 +27,12 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  # Configure swap for hibernate to disk. Swappiness is set low so that it's mainly for
+  # hibernation purposes.
+  swapDevices = [ { device = "/var/cache/swap/swapfile"; } ];
+  boot.resumeDevice = "/dev/disk/by-label/nixos";
+  boot.kernelParams = [ "resume_offset=1378304" ];
+  boot.kernel.sysctl = { "vm.swappiness" = 10; };
 
   nix.maxJobs = 8;
 }
