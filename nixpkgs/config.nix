@@ -38,7 +38,9 @@
         git-gutter-fringe
         helm
         helm-ag
+        helm-google
         helm-nixos-options
+        helm-projectile
         hlinum
         htmlize
         linum-off
@@ -49,14 +51,16 @@
         nix-sandbox
         nixos-options
         popwin
+        projectile
         pretty-sha-path # This prettifies nix-store paths.
         smart-mode-line
         use-package
       ]) ++ (with elpaPackages; [
         exwm
-      ])++ (with orgPackages; [
+      ]) ++ (with orgPackages; [
         org-plus-contrib
-      ]) ++ [ cmake-ide rtags ]);
+      ]));
+      #]) ++ [ cmake-ide rtags ]);
 
     monoisome-ttf = pkgs.stdenv.mkDerivation rec {
       name = "monoisome-${version}";
