@@ -88,7 +88,10 @@
 
   # Enable Keyboard / LCD backlight keys, media keys, volume keys with beep, eject key.
   services.hardware.pommed.enable = true;
-  services.hardware.pommed.configFile = ./pommed.conf;
+  services.hardware.pommed.configFile = pkgs.substituteAll {
+    src = ./pommed.conf;
+    pommed_beep_file = "${pkgs.pommed_light.out}/share/pommed/click.wav";
+  };
 
   # Fix suspend / resume while lid stays open.
   systemd.services.root_suspend = {
