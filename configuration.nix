@@ -22,9 +22,17 @@
   # Fix hang in kernel space by disabling hybrid graphics.
   hardware.amdHybridGraphics.disable = true;
 
-  networking.hostName = "samsara"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  networking.networkmanager.packages = [ pkgs.networkmanagerapplet ];
+  networking = {
+    hostName = "samsara"; # Define your hostname.
+    networkmanager.enable = true;
+    networkmanager.packages = [ pkgs.networkmanagerapplet ];
+
+    useDHCP = false;
+    bridges.br0.interfaces = [ "enp2s0f0" ];
+    interfaces.br0.ip4 = [ ];
+    interfaces.br0.ip6 = [ ];
+    interfaces.br0.useDHCP = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
