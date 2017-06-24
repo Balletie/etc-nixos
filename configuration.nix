@@ -96,6 +96,22 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Zeroconf networking
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+    publish.domain = true;
+    publish.userServices = true;
+  };
+
+  # Enable CUPS printing daemon
+  services.printing = {
+    enable = true;
+    gutenprint = true;
+    drivers = [ pkgs.cups-bjnp ];
+  };
+
   # Enable Keyboard / LCD backlight keys, media keys, volume keys with beep, eject key.
   services.hardware.pommed.enable = true;
   services.hardware.pommed.configFile = pkgs.substituteAll {
