@@ -1,13 +1,13 @@
 #audio_up
-"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+"[ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
     XF86AudioRaiseVolume 
 
 #audio_down
-"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+"[ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
     XF86AudioLowerVolume 
 
 #audio_mute
-"[ `amixer sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
+"[ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $6 }'` == 'off' ] && volnoti-show -s @vol_mute@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'` || volnoti-show -0 @vol_mute@ -1 @vol_mute@ -2 @vol_low@ -3 @vol_medium@ -4 @vol_high@ `amixer -D alsahw sget Master | awk -F'[][]' '/dB/ { print $2 }'`"
     XF86AudioMute 
 
 #brightness_up

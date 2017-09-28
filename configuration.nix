@@ -21,6 +21,20 @@
 
   # Fix hang in kernel space by disabling hybrid graphics.
   hardware.amdHybridGraphics.disable = true;
+  hardware.pulseaudio = {
+    enable = true;
+  };
+
+  sound.extraConfig = ''
+    pcm.alsahw {
+      type hw
+      card PCH
+    }
+    ctl.alsahw {
+      type hw
+      card PCH
+    }
+  '';
 
   networking = {
     hostName = "samsara"; # Define your hostname.
