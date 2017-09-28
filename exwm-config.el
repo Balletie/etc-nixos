@@ -3,8 +3,25 @@
 ;; Following is taken from (exwm-config-default), with some changes.
 ;; Set the initial workspace number.
 (setq exwm-workspace-number 5)
+
+(setq exwm-workspace-index-map (lambda (i) (nth i '("web " "prog" "cli " "edit" "misc"))))
+
 (setq exwm-workspace-show-all-buffers t)
 (setq exwm-layout-show-all-buffers t)
+
+;; Hide or show mode-line depending on whether in line- or char-mode
+(defun exwm-input-set-mode-line ()
+  (with-current-buffer (window-buffer)
+    (when (eq major-mode 'exwm-mode)
+      (if (equal (nth 1 (nth 1 mode-line-process)) "line")
+	  (exwm-layout-hide-mode-line)
+	(exwm-layout-show-mode-line)))))
+
+;; Add current exwm workspace to mode-line
+(add-to-list 'mode-line-front-space
+	     '(:eval (propertize
+		      (apply exwm-workspace-index-map (list exwm-workspace-current-index))
+		      'face 'mode-line-buffer-id)))
 
 ;; Make class name the buffer name
 (add-hook 'exwm-update-title-hook
@@ -20,8 +37,8 @@
 ;; 's-w': Switch workspace
 (exwm-input-set-key (kbd "s-w") #'exwm-workspace-switch)
 ;; 's-N': Switch to certain workspace
-(dotimes (i 10)
-  (exwm-input-set-key (kbd (format "s-%d" i))
+(dotimes (i 9)
+  (exwm-input-set-key (kbd (format "s-%d" (1+ i)))
 		      `(lambda ()
 			 (interactive)
 			 (exwm-workspace-switch ,i))))
