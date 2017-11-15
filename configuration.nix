@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -21,6 +17,8 @@
 
   # Fix hang in kernel space by disabling hybrid graphics.
   hardware.amdHybridGraphics.disable = true;
+
+  # Necessary for firefox.
   hardware.pulseaudio = {
     enable = true;
   };
@@ -41,11 +39,7 @@
     networkmanager.enable = true;
     networkmanager.packages = [ pkgs.networkmanagerapplet ];
 
-    useDHCP = false;
-    bridges.br0.interfaces = [ "enp2s0f0" ];
-    interfaces.br0.ip4 = [ ];
-    interfaces.br0.ip6 = [ ];
-    interfaces.br0.useDHCP = true;
+    firewall.allowedTCPPorts = [ 8000 ];
   };
 
   # Set your time zone.
@@ -110,20 +104,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Zeroconf networking
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish.enable = true;
-    publish.domain = true;
-    publish.userServices = true;
-  };
-
   # Enable CUPS printing daemon
   services.printing = {
     enable = true;
-    gutenprint = true;
-    drivers = [ pkgs.cups-bjnp ];
+    drivers = [ pkgs.cups-bjnp pkgs.gutenprint ];
   };
 
   # Enable Keyboard / LCD backlight keys, media keys, volume keys with beep, eject key.
@@ -132,6 +116,12 @@
     src = ./pommed.conf;
     pommed_beep_file = "${pkgs.pommed_light.out}/share/pommed/click.wav";
   };
+
+  # Suspend on inactivity. Allow for 5 seconds after screen goes blank.
+  services.logind.extraConfig = ''
+    IdleAction=suspend
+    IdleActionSec=35
+  '';
 
   # Fix suspend / resume while lid stays open.
   systemd.services.root_suspend = {
@@ -202,7 +192,9 @@
 
   # Enable coredumps.
   systemd.coredump.enable = true;
-  security.pam.loginLimits = [ { domain = "@wheel"; type = "-"; item = "core"; value = "unlimited"; } ];
+  security.pam.loginLimits = [
+    { domain = "@wheel"; type = "-"; item = "core"; value = "unlimited"; }
+  ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.03";
