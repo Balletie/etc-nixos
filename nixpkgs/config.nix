@@ -3,6 +3,13 @@
   allowUnfree = true;
   allowBroken = true;
   packageOverrides = pkgs: rec {
+
+    pommed_light = pkgs.pommed_light.overrideAttrs (oldAttrs: {
+      postPatch = oldAttrs.postPatch + ''
+        substituteInPlace pommed/evdev.h --replace 0262 0252
+      '';
+    });
+
     twmn = pkgs.stdenv.lib.overrideDerivation pkgs.twmn (oldAttrs: {
       patches = [
         ./twmn/0001-Add-fallback-title-option.patch
