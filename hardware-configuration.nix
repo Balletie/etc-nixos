@@ -11,6 +11,10 @@
   boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ahci" "firewire_ohci" "usbhid" ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  # Needed for SD card reader to work.
+  boot.extraModprobeConfig = ''
+  options sdhci debug_quirks=0x40
+  '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/082428f7-9e1c-401d-bf58-ec3397b09690";
