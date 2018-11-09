@@ -53,6 +53,9 @@
   nixpkgs.config = import ./nixpkgs/config.nix;
 
   nix.useSandbox = true;
+  nix.extraOptions = ''
+  tarball-ttl = 0
+  '';
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -202,6 +205,6 @@
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
+  system.stateVersion = "18.09";
 
 }
