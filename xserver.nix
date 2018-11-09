@@ -63,6 +63,7 @@
       lightdm.greeters.gtk = {
         theme.package = pkgs.zuki-themes;
         theme.name = "Zukitre";
+	indicators = [ "~host" "~spacer" "~clock" "~spacer" "~session" "~language" "~a11y" "~power" ];
       };
 
       sessionCommands = ''
@@ -84,10 +85,10 @@
 	  scaleSvg = img: pkgs.runCommand (baseNameOf (builtins.unsafeDiscardStringContext img)) { nativeBuildInputs = [ pkgs.librsvg ]; } "${pkgs.librsvg.out}/bin/rsvg-convert -a -w 200 -f svg ${img} > $out";
           xbindkeysrc = pkgs.substituteAll {
             src = ./xbindkeysrc;
-	    vol_low = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-low-symbolic.svg"}";
-	    vol_medium = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-medium-symbolic.svg"}";
-	    vol_high = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-high-symbolic.svg"}";
-	    vol_mute = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/audio-volume-muted-symbolic.svg"}";
+	    vol_low = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/devices/audio-volume-low-symbolic.svg"}";
+	    vol_medium = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/devices/audio-volume-medium-symbolic.svg"}";
+	    vol_high = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/devices/audio-volume-high-symbolic.svg"}";
+	    vol_mute = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/devices/audio-volume-muted-symbolic.svg"}";
 	    brightness = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/display-brightness-symbolic.svg"}";
 	    kbd_brightness = "${scaleSvg "${pkgs.gnome3.adwaita-icon-theme.out}/share/icons/Adwaita/scalable/status/keyboard-brightness-symbolic.svg"}";
           };
