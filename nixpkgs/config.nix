@@ -30,40 +30,67 @@
       patches = [ ./volnoti/fix_icon_bounds.patch ];
     });
 
-    skipsEmacs = with pkgs.emacs25PackagesNg;
-      pkgs.emacs25WithPackages ((with melpaPackages; [
-        aggressive-indent
-        auctex
-        avy
+    skipsEmacs = with pkgs.emacs26PackagesNg;
+      pkgs.emacs26WithPackages ((with melpaPackages; [
+        # Emacs utility packages and libraries
+        use-package
         benchmark-init
-        cmake-ide
+        f
+        s
+
+        auctex # LaTeX mode
+        avy # Quick search on character
+        popwin # Popup windows
+        smart-mode-line # Configurable modeline
+        hlinum
+        linum-off
+        htmlize
+        magit # Git frontend
         color-theme-sanityinc-tomorrow
-        company
-        dante
-        direnv
+        diminish # Remove minor modes from modeline.
+        projectile # Find projects, search in projects
+        elfeed
+        elfeed-goodies
+        elfeed-org
+        emms # Media player
+
+        # Vim emulation
         evil
-        evil-goggles
+        evil-goggles # Visual highlighting when yankin/deleting/etc.
         evil-magit
-        flycheck
-        haskell-mode
+
         helm
         helm-ag
-        helm-google
         helm-projectile
-        hlinum
-        htmlize
-        linum-off
-        magit
+
+        # org-mode stuff
+        org-bullets
+	
+        # Nix related stuff
         nix-mode
-        nix-sandbox
-        nixos-options
-        popwin
-        projectile
-        pretty-sha-path # This prettifies nix-store paths.
-        smart-mode-line
-        use-package
+        # nix-update
+
+        yasnippet
+        yasnippet-snippets
+
+        # Switches direnv environments.
+        # When used together with Nix, provides seamless switching of environments when
+        # switching buffers in Emacs.
+        direnv
+
+        # Programming language modes
+        php-mode
         web-mode
+        haskell-mode
+        dante # Frontend to GHCi and integrates with flycheck & company.
+        vue-mode
+        # Code completion
+        company
+        company-jedi
+        # Syntax checking
+        flycheck
       ]) ++ (with elpaPackages; [
+        # Emacs window manager
         exwm
       ]) ++ (with orgPackages; [
         org-plus-contrib
