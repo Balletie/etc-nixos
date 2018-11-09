@@ -73,8 +73,6 @@
 (push ?\C-7 exwm-input-prefix-keys)
 (push ?\C-8 exwm-input-prefix-keys)
 (push ?\C-9 exwm-input-prefix-keys)
-;; C-c is needed for copying
-(delete ?\C-c exwm-input-prefix-keys)
 (delete ?\C-v exwm-input-prefix-keys)
 
 (require 'exwm-systemtray)
