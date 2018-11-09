@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./mount-disks.nix
       ./xserver.nix
+      ./amd-hybrid-graphics.nix
     ];
 
   # Use the systemd-boot efi boot loader.
