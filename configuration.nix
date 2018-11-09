@@ -43,6 +43,10 @@
     firewall.allowedTCPPorts = [ 8080 8000 ];
   };
 
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = false;
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
@@ -185,7 +189,7 @@
     initialPassword = "foobar";
     home = "/home/skip";
     createHome = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = "/run/current-system/sw/bin/zsh";
     isNormalUser = true;
     uid = 1000;
