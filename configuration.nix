@@ -40,7 +40,7 @@
     networkmanager.enable = true;
     networkmanager.packages = [ pkgs.networkmanagerapplet ];
 
-    firewall.allowedTCPPorts = [ 8000 ];
+    firewall.allowedTCPPorts = [ 8080 8000 ];
   };
 
   # Set your time zone.
