@@ -110,7 +110,10 @@
   services.udisks2.enable = true;
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
+  };
 
   # Enable CUPS printing daemon
   services.printing = {
